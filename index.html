@@ -5,57 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0f172a">
-<title>Mats Body Reset – Daily Tracker (v7)</title>
+<title>Mats Body Reset – Daily Tracker (v7b)</title>
 <style>
-  :root{
-    --bg:#0f172a; --panel:#111827EE; --muted:#94a3b8; --text:#e5e7eb;
-    --accent:#22d3ee; --accent2:#a78bfa; --ok:#34d399; --warn:#f59e0b; --danger:#f87171;
-    --border:#1f2937;
-  }
-  body.theme-dark{ --bg:#0f172a; --panel:#111827EE; --text:#e5e7eb; --muted:#94a3b8; --border:#1f2937;
-    --accent:#22d3ee; --accent2:#a78bfa; background:radial-gradient(1200px 800px at 20% 0%, #0b1228 0%, #0f172a 50%, #0a0f22 100%); color:var(--text); }
-  body.theme-light{ --bg:#f8fafc; --panel:#ffffff; --text:#0f172a; --muted:#475569; --border:#e2e8f0;
-    --accent:#0ea5e9; --accent2:#6366f1; background:linear-gradient(180deg,#f8fafc,#f1f5f9); color:var(--text); }
-  body.theme-bright{ --bg:#0a0a0a; --panel:#ffffff; --text:#0a0a0a; --muted:#374151; --border:#111827;
-    --accent:#16a34a; --accent2:#22d3ee; background:linear-gradient(180deg,#111827,#0a0a0a); color:var(--text); }
-  *{box-sizing:border-box}
-  html,body{height:100%} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+  :root{--bg:#0f172a;--panel:#111827EE;--muted:#94a3b8;--text:#e5e7eb;--accent:#22d3ee;--accent2:#a78bfa;--ok:#34d399;--warn:#f59e0b;--danger:#f87171;--border:#1f2937}
+  body.theme-dark{--bg:#0f172a;--panel:#111827EE;--text:#e5e7eb;--muted:#94a3b8;--border:#1f2937;--accent:#22d3ee;--accent2:#a78bfa;background:radial-gradient(1200px 800px at 20% 0%, #0b1228 0%, #0f172a 50%, #0a0f22 100%);color:var(--text)}
+  body.theme-light{--bg:#f8fafc;--panel:#ffffff;--text:#0f172a;--muted:#475569;--border:#e2e8f0;--accent:#0ea5e9;--accent2:#6366f1;background:linear-gradient(180deg,#f8fafc,#f1f5f9);color:var(--text)}
+  body.theme-bright{--bg:#0a0a0a;--panel:#ffffff;--text:#0a0a0a;--muted:#374151;--border:#111827;--accent:#16a34a;--accent2:#22d3ee;background:linear-gradient(180deg,#ffffff,#f4f4f5);color:var(--text)}
+  *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto} 
   header{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:linear-gradient(180deg, rgba(2,6,23,.75), rgba(2,6,23,.3));border-bottom:1px solid var(--border);
     padding:.55rem 1rem;display:flex;gap:12px;align-items:center;justify-content:space-between}
-  body.theme-light header{ background:linear-gradient(180deg,#fff,#f8fafc); } body.theme-bright header{ background:linear-gradient(180deg,#ffffff,#f4f4f5); }
+  body.theme-light header{background:linear-gradient(180deg,#fff,#f8fafc)} body.theme-bright header{background:linear-gradient(180deg,#fff,#f4f4f5)}
   .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;letter-spacing:.3px}
-  .brand .logo{width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 24px #22d3ee55 inset,0 10px 24px #0002}
+  .brand .logo{width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2))}
   .brand small{display:block;color:var(--muted);font-weight:500}
   .controls{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
-  .btn{cursor:pointer;border:1px solid var(--border);color:var(--text);background:var(--panel);padding:.35rem .55rem;border-radius:10px;font-weight:600;font-size:12.5px;transition:.15s transform,.15s background,.15s box-shadow}
-  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px #0002}
-  .btn.primary{background:linear-gradient(135deg, var(--panel), rgba(14,26,58,.1));}
-  .btn.toggled{outline:2px solid var(--accent);box-shadow:0 0 0 3px #22d3ee33 inset}
-  .btn.warn{border-color:#a16207} .btn.danger{border-color:#b91c1c} .btn.muted, .btn[disabled]{opacity:.55;filter:saturate(.6);cursor:not-allowed}
-  .icon-btn{padding:.2rem .35rem;border-radius:8px;font-size:12px}
-  input[type="number"], input[type="text"], textarea, select{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:.22rem .35rem;font-size:12.5px}
-  main{display:grid;grid-template-columns:280px 1fr;gap:12px;padding:12px} @media (max-width:1100px){main{grid-template-columns:1fr}}
+  .btn{cursor:pointer;border:1px solid var(--border);color:var(--text);background:var(--panel);padding:.35rem .55rem;border-radius:10px;font-weight:600;font-size:12.5px}
+  .btn.toggled{outline:2px solid var(--accent)}
+  main{display:grid;grid-template-columns:280px 1fr;gap:12px;padding:12px}
+  @media (max-width:1100px){main{grid-template-columns:1fr}.sidebar{position:static}}
   .sidebar{position:sticky;top:64px;align-self:start;display:grid;gap:10px}
-  .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:9px;box-shadow:0 10px 24px #0002}
-  details.collapsible{overflow:hidden} details.collapsible summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.4rem;font-weight:700}
-  details.collapsible summary::-webkit-details-marker{display:none} .chev{transition:transform .2s} details[open] .chev{transform:rotate(90deg)}
-  .footer{opacity:.8;font-size:11.5px;color:var(--muted)}
-  .content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;align-items:start}
-  .category{display:grid;gap:6px;contain:paint} .category h2{margin:0;font-size:13px;letter-spacing:.3px;color:var(--muted);display:flex;align-items:center;gap:.45rem}
-  .tag{font-size:10px;padding:.05rem .35rem;border:1px solid var(--border);border-radius:999px;color:var(--accent2)}
-  .cat-actions{margin-left:auto;display:flex;gap:.25rem}
-  .tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px} .tasks.two-col{grid-template-columns:repeat(2,minmax(200px,1fr))}
-  .task-card{background:linear-gradient(180deg, rgba(17,24,39,.08), rgba(2,6,23,.02));border:1px solid var(--border);border-radius:10px;padding:7px;display:grid;gap:5px}
-  body.theme-dark .task-card{background:linear-gradient(180deg, rgba(17,24,39,.85), rgba(2,6,23,.85))} .task-card.done{opacity:.45;filter:saturate(.6)}
-  .task-head{display:flex;align-items:center;gap:.35rem} .task-emoji{font-size:15px} .task-title{font-weight:700;font-size:12.5px} .task-count{margin-left:auto;color:#3b82f6;font-weight:700;font-size:11.5px}
-  .task-det{color:var(--muted);font-size:11px} .actions{display:flex;gap:.3rem;flex-wrap:wrap} .pill{font-size:10px;border:1px solid var(--border);color:var(--muted);padding:.1rem .3rem;border-radius:999px}
-  .progressbar{height:4px;background:transparent;border:1px solid var(--border);border-radius:999px;overflow:hidden} .progressbar>div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:9px}
+  details.collapsible summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.4rem;font-weight:700}
+  .content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;align-items:start}
+  .category{display:grid;gap:6px} .category h2{margin:0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:.45rem}
+  .tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px} .tasks.two-col{grid-template-columns:repeat(2,minmax(210px,1fr))}
+  .task-card{background:linear-gradient(180deg, rgba(17,24,39,.85), rgba(2,6,23,.85));border:1px solid var(--border);border-radius:10px;padding:7px;display:grid;gap:5px}
+  .task-card.done{opacity:.45;filter:saturate(.6)} .task-head{display:flex;align-items:center;gap:.35rem}
+  .task-emoji{font-size:15px} .task-title{font-weight:700;font-size:12.5px} .task-count{margin-left:auto;color:#3b82f6;font-weight:700;font-size:11.5px}
+  .progressbar{height:4px;background:transparent;border:1px solid var(--border);border-radius:999px;overflow:hidden}
+  .progressbar>div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}
   .log-area{width:100%;height:110px;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px;font-size:12px}
   .checklist{display:grid;gap:6px} .cl-row{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:.35rem;align-items:center}
-  .cl-title{font-size:12px} .cl-num{width:48px;text-align:center} .tiny{font-size:11px;color:var(--muted)} .divider{border-top:1px dashed var(--border);margin:.35rem 0}
+  .cl-title{font-size:12px} .cl-num{width:48px;text-align:center} .tiny{font-size:11px;color:var(--muted)} .soft{border:1px dashed var(--border);border-radius:8px;padding:6px}
   .modal{position:fixed;inset:0;display:none;place-items:center;background:#0006;z-index:100} .modal.show{display:grid}
   .modal .box{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px;width:min(680px,92vw);display:grid;gap:8px}
-  .section-title{font-weight:800;font-size:12px;color:var(--muted);margin:6px 0 2px} .soft{border:1px dashed var(--border);border-radius:8px;padding:6px}
   .timer.running .timer-display{font-size:56px}
   .badge{font-size:11px;border:1px solid var(--border);border-radius:999px;padding:.1rem .4rem;color:var(--muted)}
 </style>
@@ -68,7 +51,7 @@
   </div>
   <div class="controls">
     <button id="themeToggle" class="btn">🎨 Mode: Dark</button>
-    <button id="atComputerBtn" class="btn primary">💻 I'm at the computer</button>
+    <button id="atComputerBtn" class="btn">💻 I'm at the computer</button>
     <label class="btn">🔔 Volume
       <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" style="vertical-align:middle;width:110px;margin-left:.5rem">
     </label>
@@ -77,44 +60,44 @@
     <button id="exportSettings" class="btn">🧩 Save settings</button>
     <button id="importSettings" class="btn">🧩 Load settings</button>
     <button id="linkSettings" class="btn">🔗 Link settings file</button>
-    <button id="resetAll" class="btn danger">♻️ Full reset</button>
+    <button id="resetAll" class="btn">♻️ Full reset</button>
   </div>
 </header>
 
 <main>
   <aside class="sidebar">
     <details class="panel collapsible" open>
-      <summary><span class="chev">▶</span> 🔁 Reminder scheduler</summary>
-      <div class="tiny" style="margin:.3rem 0">When the 💻 button is ON, bells will fire according to each task's daily count.</div>
+      <summary>🔁 Reminder scheduler</summary>
+      <div class="tiny">When the 💻 button is ON, bells will fire according to each task's daily count.</div>
       <div style="display:flex;gap:.35rem;flex-wrap:wrap">
-        <button id="startReminders" class="btn primary">Start</button>
-        <button id="stopReminders" class="btn warn">Stop</button>
+        <button id="startReminders" class="btn">Start</button>
+        <button id="stopReminders" class="btn">Stop</button>
         <button id="remindNow" class="btn">Ring now</button>
       </div>
-      <div class="footer" style="margin-top:6px">Next: <span id="nextReminder">—</span></div>
+      <div class="tiny" style="margin-top:6px">Next: <span id="nextReminder">—</span></div>
     </details>
 
     <details class="panel collapsible" open>
-      <summary><span class="chev">▶</span> ⏱️ Trampoline timer</summary>
+      <summary>⏱️ Trampoline timer</summary>
       <div class="timer" id="timerBox" style="margin-top:.35rem;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center">
         <div class="timer-display" id="timerDisplay" style="font-weight:800;letter-spacing:.6px">03:00</div>
         <div><input id="timerInput" type="number" min="1" max="60" value="3" style="width:64px"> min</div>
       </div>
       <div style="display:flex;gap:.35rem;margin-top:6px">
-        <button id="timerStart" class="btn primary">Start</button>
+        <button id="timerStart" class="btn">Start</button>
         <button id="timerPause" class="btn">Pause</button>
         <button id="timerReset" class="btn">Reset</button>
       </div>
     </details>
 
     <details class="panel collapsible" open>
-      <summary><span class="chev">▶</span> 📅 Daily log (preview)</summary>
+      <summary>📅 Daily log (preview)</summary>
       <textarea id="logPreview" class="log-area" readonly style="margin-top:.35rem"></textarea>
     </details>
 
     <details class="panel collapsible" id="checklistWrap">
-      <summary><span class="chev">▶</span> ✅ Checklist (show/hide, edit, categories)</summary>
-      <div class="tiny" style="margin-top:.35rem">Toggles visibility; edit reminders; add tasks/categories. Saves automatically.</div>
+      <summary>✅ Checklist (show/hide, edit, categories)</summary>
+      <div class="tiny" style="margin-top:.35rem">Toggle visibility; edit reminders; add/delete tasks & categories. Saves automatically.</div>
       <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin:.35rem 0">
         <button id="addCategory" class="btn">➕ New category</button>
         <button id="enableAll" class="btn">Enable all</button>
@@ -135,7 +118,7 @@
     <div id="quickTaskWrap" style="max-height:56vh;overflow:auto;margin-top:6px"></div>
     <div style="display:flex;gap:.35rem;justify-content:center;margin-top:6px">
       <button class="btn" id="modalSnooze">Snooze 5 min</button>
-      <button class="btn primary" id="modalClose">OK</button>
+      <button class="btn" id="modalClose">OK</button>
     </div>
   </div>
 </div>
@@ -152,7 +135,7 @@
     </div>
     <div style="display:flex;gap:.35rem;justify-content:flex-end;margin-top:6px">
       <button class="btn" id="editCancel">Cancel</button>
-      <button class="btn primary" id="editSave">Save</button>
+      <button class="btn" id="editSave">Save</button>
     </div>
   </div>
 </div>
@@ -166,20 +149,41 @@
     </div>
     <div style="display:flex;gap:.35rem;justify-content:flex-end;margin-top:6px">
       <button class="btn" id="catCancel">Cancel</button>
-      <button class="btn primary" id="catSave">Save</button>
+      <button class="btn" id="catSave">Save</button>
     </div>
   </div>
 </div>
 
 <script>
+// SW with immediate update + auto reload
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  window.addEventListener('load', async () => {
+    try {
+      const reg = await navigator.serviceWorker.register('./sw.js');
+      reg.update();
+      setInterval(() => reg.update(), 6 * 60 * 60 * 1000);
+      if (reg.waiting) reg.waiting.postMessage('SKIP_WAITING');
+      reg.addEventListener('updatefound', () => {
+        const sw = reg.installing;
+        if (sw) sw.addEventListener('statechange', () => {
+          if (sw.state === 'installed' && navigator.serviceWorker.controller) {
+            reg.waiting && reg.waiting.postMessage('SKIP_WAITING');
+          }
+        });
+      });
+      let refreshed = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (refreshed) return; refreshed = true; window.location.reload();
+      });
+    } catch (e) {}
+  });
 }
 
 const LS_KEY='mats_reset_tracker_v7', LOG_KEY='mats_reset_log_v7', ENABLE_KEY='mats_reset_enabled_v7', TASKS_KEY='mats_reset_tasks_v7', CATS_KEY='mats_reset_categories_v7', THEME_KEY='mats_reset_theme_v7';
 const EMOJIS=['🌀','🌬️','⚡','🚶','🤸','👃','💆','🦶','🫁','🏋️','🦴','🐸','🧠','🍑','🦖','🧘','💗','🌱','🪢','🧷','🧱','🦘','🏃','🎯','⭐','⬤','◆','■','💫','✨','🟣','🔵','🟢','🟠'];
-const BASE_CATS=[Cat('MOVEMENT_AND_RELEASE','Movement & Release','🌀',true),Cat('BREATHING_AND_EMOTIONAL_RESET','Breathing & Emotional Reset','🌬️',true),Cat('ACTIVATION','Activation','⚡',true),Cat('BREAKS_AND_WIGGLES','Breaks & Wiggles','🚶',true)];
 function Cat(id,name,emoji,builtin){return {id,name,emoji:emoji||'⭐',builtin:!!builtin};}
+const BASE_CATS=[Cat('MOVEMENT_AND_RELEASE','Movement & Release','🌀',true),Cat('BREATHING_AND_EMOTIONAL_RESET','Breathing & Emotional Reset','🌬️',true),Cat('ACTIVATION','Activation','⚡',true),Cat('BREAKS_AND_WIGGLES','Breaks & Wiggles','🚶',true)];
+function T(id,title,details,category,countsPerDay,remindersPerDay,emoji,builtin){const cpd=Math.max(1,countsPerDay|0),rpd=Math.max(0,remindersPerDay|0);return {id,title,details,category,countsPerDay:cpd,remindersPerDay:rpd,emoji:emoji||'•',builtin:!!builtin};}
 const BASE_TASKS=[
 T('symm_move','Symmetrical Movement Stimulation','including star jumps and marching/crawling','MOVEMENT_AND_RELEASE',2,2,'🤸',true),
 T('cranial_release','Cranial/Sphenoid Release','Nose blowing with side bend','MOVEMENT_AND_RELEASE',2,2,'👃',true),
@@ -203,29 +207,25 @@ T('trampoline','Trampoline','3 minutes – use timer','ACTIVATION',3,3,'🦘',tr
 T('walk_jog','Walk / Jog','Regular short breaks','BREAKS_AND_WIGGLES',1,1,'🏃',true),
 T('wiggle_hit','Wiggle & Hit','Shake it out, tap','BREAKS_AND_WIGGLES',1,0,'🎯',true),
 ];
-function T(id,title,details,category,countsPerDay,remindersPerDay,emoji,builtin){const cpd=Math.max(1,countsPerDay|0),rpd=Math.max(0,remindersPerDay|0);return {id,title,details,category,countsPerDay:cpd,remindersPerDay:rpd,emoji:emoji||'•',builtin:!!builtin};}
 
-// IDB for handle
+// IDB tiny KV for file handle
 const idbKV={db:null,async open(){if(this.db) return this.db; this.db=await new Promise((res,rej)=>{const req=indexedDB.open('mats-reset-idb',1); req.onupgradeneeded=()=>req.result.createObjectStore('kv'); req.onsuccess=()=>res(req.result); req.onerror=()=>rej(req.error);}); return this.db;},
   async get(key){const db=await this.open(); return new Promise((res,rej)=>{const tx=db.transaction('kv','readonly'); const st=tx.objectStore('kv'); const r=st.get(key); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error);});},
   async set(key,val){const db=await this.open(); return new Promise((res,rej)=>{const tx=db.transaction('kv','readwrite'); const st=tx.objectStore('kv'); const r=st.put(val,key); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error);});} };
 
+// Storage selection (OPFS auto > linked file > LocalStorage)
 const storageBadge=document.getElementById('storageMode');
 async function opfsSupported(){return !!(navigator.storage && navigator.storage.getDirectory);}
 async function opfsReadText(){try{const root=await navigator.storage.getDirectory(); const fh=await root.getFileHandle('settings.json',{create:false}); const f=await fh.getFile(); return await f.text();}catch(e){return null;}}
 async function opfsWriteText(text){try{const root=await navigator.storage.getDirectory(); const fh=await root.getFileHandle('settings.json',{create:true}); const ws=await fh.createWritable(); await ws.write(text); await ws.close(); return true;}catch(e){return false;}}
-
 let fileHandle=null; async function loadLinkedHandle(){try{fileHandle=await idbKV.get('settingsHandle');}catch(e){fileHandle=null;}}
 async function fsReadText(){if(!fileHandle) return null; try{const f=await fileHandle.getFile(); return await f.text();}catch(e){return null;}}
 async function fsWriteText(text){if(!fileHandle) return false; try{const perm=await fileHandle.requestPermission({mode:'readwrite'}); if(perm!=='granted') return false; const ws=await fileHandle.createWritable(); await ws.write(text); await ws.close(); return true;}catch(e){return false;}}
-
 async function linkSettingsFile(){
   if(!window.showSaveFilePicker){ alert('Linking requires a Chromium browser (File System Access API).'); return; }
   const handle=await window.showSaveFilePicker({ suggestedName:'settings.json', types:[{description:'JSON',accept:{'application/json':['.json']}}] });
-  await idbKV.set('settingsHandle', handle); fileHandle=handle;
-  storageBadge.textContent='Linked File'; alert('Linked settings.json. Future saves/loads will be one‑click.');
+  await idbKV.set('settingsHandle', handle); fileHandle=handle; storageBadge.textContent='Linked File'; alert('Linked settings.json. Saves/loads will use this file.');
 }
-
 function currentSettingsPayload(){ return JSON.stringify({ tasks: loadTaskStore(), categories: loadCatStore(), enabled: state.enabled, theme: loadTheme() }, null, 2); }
 async function autoLoadSettingsFromFile(){
   if(await opfsSupported()){ const txt=await opfsReadText(); if(txt){ applySettingsJSON(txt); storageBadge.textContent='OPFS (auto)'; return; } storageBadge.textContent='OPFS (auto)'; return; }
@@ -238,7 +238,7 @@ document.getElementById('exportSettings').onclick=async()=>{ await autoSaveSetti
 document.getElementById('importSettings').onclick=async()=>{ await autoLoadSettingsFromFile(); renderChecklist(); render(); alert('Settings loaded.'); };
 document.getElementById('linkSettings').onclick=linkSettingsFile;
 
-// State & helpers
+// Core stores
 function loadTaskStore(){let s={overrides:{},customs:[]}; try{s=JSON.parse(localStorage.getItem(TASKS_KEY)||'{}')||s;}catch(e){} if(!s.overrides) s.overrides={}; if(!Array.isArray(s.customs)) s.customs=[]; return s;}
 function saveTaskStore(s){localStorage.setItem(TASKS_KEY, JSON.stringify(s)); autoSaveSettingsToFile();}
 function loadCatStore(){let s={overrides:{},customs:[]}; try{s=JSON.parse(localStorage.getItem(CATS_KEY)||'{}')||s;}catch(e){} if(!s.overrides) s.overrides={}; if(!Array.isArray(s.customs)) s.customs=[]; return s;}
@@ -250,27 +250,27 @@ function getTaskById(id){return getTasks().find(t=>t.id===id);}
 function loadEnabled(){let raw={}; try{raw=JSON.parse(localStorage.getItem(ENABLE_KEY)||'{}')||{};}catch(e){raw={}} getTasks().forEach(t=>{if(!(t.id in raw)) raw[t.id]=true;}); localStorage.setItem(ENABLE_KEY, JSON.stringify(raw)); return raw;}
 function saveEnabled(map){localStorage.setItem(ENABLE_KEY, JSON.stringify(map)); autoSaveSettingsToFile();}
 function todayKey(){const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
-function loadPersist(){let raw={}; try{raw=JSON.parse(localStorage.getItem(LS_KEY)||'{}')||{};}catch(e){raw={}} const key=todayKey(); if(!raw[key]){const tasks={}; getTasks().forEach(t=>tasks[t.id]={done:0}); raw[key]={atComputer:false,tasks};} const tasks=raw[key].tasks; getTasks().forEach(t=>{if(!tasks[t.id]) tasks[t.id]={done:0};}); localStorage.setItem(LS_KEY, JSON.stringify(raw)); return raw;}
+function loadPersist(){let raw={}; try{raw=JSON.parse(localStorage.getItem(LS_KEY)||'{}')||{};}catch(e){} const key=todayKey(); if(!raw[key]){const tasks={}; getTasks().forEach(t=>tasks[t.id]={done:0}); raw[key]={atComputer:false,tasks};} const tasks=raw[key].tasks; getTasks().forEach(t=>{if(!tasks[t.id]) tasks[t.id]={done:0};}); localStorage.setItem(LS_KEY, JSON.stringify(raw)); return raw;}
 function savePersist(raw){localStorage.setItem(LS_KEY, JSON.stringify(raw));}
 const gridEl=document.getElementById('grid'), checklistEl=document.getElementById('checklist'), quickTaskWrap=document.getElementById('quickTaskWrap');
 const state={enabled:{},schedule:[],timers:[],atComputer:false};
 function loadTheme(){return localStorage.getItem(THEME_KEY)||'dark';} function saveTheme(t){localStorage.setItem(THEME_KEY,t); applyTheme(t); autoSaveSettingsToFile();}
 function applyTheme(t){document.body.className=''; document.body.classList.add('theme-'+t); document.getElementById('themeToggle').textContent='🎨 Mode: '+(t==='dark'?'Dark':t==='light'?'Light':'Bright');}
 
-// Checklist & UI
+// Checklist
 function renderChecklist(){
   const cats=getCategories(), tasks=getTasks(), enabled=state.enabled; checklistEl.innerHTML='';
   cats.forEach(cat=>{
     const bar=document.createElement('div'); bar.className='cl-row soft';
     bar.innerHTML=`<div><strong>${cat.emoji}</strong></div><div class="cl-title"><strong>${cat.name}</strong></div>
       <div class="tiny" style="justify-self:end;grid-column:3/6">
-        <button class="btn icon-btn" data-cat-edit="${cat.id}">✏️ Edit</button>
-        <button class="btn icon-btn" data-cat-del="${cat.id}">🗑️ Delete</button>
-        <button class="btn icon-btn" data-cat-add="${cat.id}">➕ Add item</button>
+        <button class="btn" data-cat-edit="${cat.id}">✏️ Edit</button>
+        <button class="btn" data-cat-del="${cat.id}">🗑️ Delete</button>
+        <button class="btn" data-cat-add="${cat.id}">➕ Add item</button>
       </div>`;
     checklistEl.appendChild(bar);
     const header=document.createElement('div'); header.className='cl-row tiny';
-    header.innerHTML=`<span></span><span class="tiny" style="opacity:.8">Task</span><span class="tiny" style="justify-self:end">Reminders</span><span class="tiny" style="justify-self:end">Edit</span><span class="tiny" style="justify-self:end">Delete</span>`;
+    header.innerHTML=`<span></span><span class="tiny">Task</span><span class="tiny" style="justify-self:end">Reminders</span><span class="tiny" style="justify-self:end">Edit</span><span class="tiny" style="justify-self:end">Delete</span>`;
     checklistEl.appendChild(header);
 
     tasks.filter(t=>t.category===cat.id).forEach(t=>{
@@ -278,33 +278,25 @@ function renderChecklist(){
       row.innerHTML=`
       <input type="checkbox" ${enabled[t.id]!==false?'checked':''} data-id="${t.id}">
       <span class="cl-title">${t.title}</span>
-      <input class="cl-num" type="number" min="0" value="${t.remindersPerDay}" data-id="${t.id}" data-field="remindersPerDay" title="Reminders/day">
-      <button class="btn icon-btn" data-action="edit" data-id="${t.id}">✏️</button>
-      <button class="btn icon-btn" data-action="delete" data-id="${t.id}" ${(t.builtin && !isTaskInDeletedCategory(t))?'disabled':''}>🗑️</button>`;
+      <input class="cl-num" type="number" min="0" value="${t.remindersPerDay}" data-id="${t.id}" data-field="remindersPerDay">
+      <button class="btn" data-action="edit" data-id="${t.id}">✏️</button>
+      <button class="btn" data-action="delete" data-id="${t.id}" ${(t.builtin)?'':'style="border-color:#b91c1c"'}>🗑️</button>`;
       checklistEl.appendChild(row);
     });
-    checklistEl.appendChild(document.createElement('div')).className='divider';
   });
 
-  checklistEl.querySelectorAll('input[type="checkbox"]').forEach(chk=>{
-    chk.onchange=()=>{ state.enabled[chk.dataset.id]=chk.checked; saveEnabled(state.enabled); render(); };
-  });
-  checklistEl.querySelectorAll('input[type="number"]').forEach(num=>{
-    num.onchange=()=>{ const id=num.dataset.id; const val=Math.max(0, parseInt(num.value,10)||0); updateTaskField(id,'remindersPerDay',val); };
-  });
+  checklistEl.querySelectorAll('input[type="checkbox"]').forEach(chk=>{ chk.onchange=()=>{ state.enabled[chk.dataset.id]=chk.checked; saveEnabled(state.enabled); render(); }; });
+  checklistEl.querySelectorAll('input[type="number"]').forEach(num=>{ num.onchange=()=>{ const id=num.dataset.id; const val=Math.max(0, parseInt(num.value,10)||0); updateTaskField(id,'remindersPerDay',val); }; });
   checklistEl.querySelectorAll('button[data-action="edit"]').forEach(b=>b.onclick=()=>openEditModal(getTaskById(b.dataset.id)));
   checklistEl.querySelectorAll('button[data-action="delete"]').forEach(b=>b.onclick=()=>deleteTask(b.dataset.id));
   checklistEl.querySelectorAll('button[data-cat-add]').forEach(b=>b.onclick=()=>openEditModal({category:b.dataset.catAdd}));
   checklistEl.querySelectorAll('button[data-cat-edit]').forEach(b=>b.onclick=()=>openCatModal(getCategoryById(b.dataset.catEdit)));
   checklistEl.querySelectorAll('button[data-cat-del]').forEach(b=>b.onclick=()=>deleteCategory(b.dataset.catDel));
 }
-function isTaskInDeletedCategory(t){ return !getCategoryById(t.category); }
 function updateTaskField(id,field,value){
-  const store=loadTaskStore(); const base=BASE_TASKS.find(t=>t.id===id);
-  if(base){ store.overrides[id]={...(store.overrides[id]||{}), [field]:value}; } else {
+  const store=loadTaskStore(); if(BASE_TASKS.find(t=>t.id===id)){ store.overrides[id]={...(store.overrides[id]||{}), [field]:value}; } else {
     const i=store.customs.findIndex(t=>t.id===id); if(i>=0){ store.customs[i][field]=value; }
-  }
-  saveTaskStore(store); render();
+  } saveTaskStore(store); render();
 }
 
 // Task Add/Edit/Delete
@@ -354,12 +346,16 @@ document.getElementById('editSave').onclick=()=>{
 function deleteTask(id){
   if(!confirm('Delete this task?')) return;
   const store=loadTaskStore();
-  const bi=BASE_TASKS.find(t=>t.id===id);
-  if(bi){ store.overrides[id]={...(store.overrides[id]||{}), removed:true}; }
-  else{ const i=store.customs.findIndex(t=>t.id===id); if(i>=0){ store.customs.splice(i,1); } }
+  const baseIndex = BASE_TASKS.findIndex(t=>t.id===id);
+  if(baseIndex>=0){
+    store.overrides[id]={...(store.overrides[id]||{}), removed:true};
+  } else {
+    const i=store.customs.findIndex(t=>t.id===id);
+    if(i>=0){ store.customs.splice(i,1); }
+  }
   saveTaskStore(store);
-  const raw=loadPersist(); const key=todayKey(); delete raw[key].tasks[id]; savePersist(raw);
-  const en=loadEnabled(); delete en[id]; saveEnabled(en); state.enabled=en;
+  const raw=loadPersist(); const key=todayKey(); if(raw[key] && raw[key].tasks){ delete raw[key].tasks[id]; savePersist(raw); }
+  const en=loadEnabled(); if(en && en.hasOwnProperty(id)){ delete en[id]; saveEnabled(en); state.enabled=en; }
   renderChecklist(); render();
 }
 
@@ -409,64 +405,48 @@ function deleteCategory(id){
   tstore.customs = tstore.customs.filter(t=>t.category!==id);
   saveTaskStore(tstore);
   const raw=loadPersist(); const key=todayKey(); const today=raw[key];
-  Object.keys(today.tasks).forEach(tid=>{ const t=getTaskById(tid); if(!t || t.category===id){ delete today.tasks[tid]; } });
+  Object.keys(today.tasks).forEach(tid=>{ const tt=getTaskById(tid); if(!tt || tt.category===id){ delete today.tasks[tid]; } });
   raw[key]=today; savePersist(raw);
   const en=loadEnabled(); Object.keys(en).forEach(id2=>{ const t=getTaskById(id2); if(!t){ delete en[id2]; } }); saveEnabled(en); state.enabled=en;
   renderChecklist(); render();
 }
 
-// Render dashboard
+// Render
 function render(){
   document.getElementById('clock').textContent=new Date().toLocaleTimeString();
   document.getElementById('logPreview').value=buildDayReport();
   const today=getToday(); state.atComputer=today.atComputer; document.getElementById('atComputerBtn').classList.toggle('toggled',state.atComputer);
   const cats=getCategories(); const tasks=getTasks(); gridEl.innerHTML='';
-
-  const topBar=document.createElement('div'); topBar.className='panel soft'; topBar.innerHTML=`<button class="btn" id="addCatTop">➕ New category</button>`;
-  gridEl.appendChild(topBar); topBar.querySelector('#addCatTop').onclick=()=>openCatModal(null);
-
   cats.forEach(cat=>{
     const catWrap=document.createElement('div'); catWrap.className='category panel';
-    const tagText = cat.id.replace(/_/g,' ');
-    catWrap.innerHTML=`<h2>${cat.emoji} ${cat.name} <span class="tag">${tagText}</span>
-      <span class="cat-actions">
-        <button class="btn icon-btn" data-cat-edit="${cat.id}">✏️</button>
-        <button class="btn icon-btn" data-cat-del="${cat.id}">🗑️</button>
-        <button class="btn icon-btn" data-cat-add="${cat.id}">➕</button>
-      </span></h2>`;
+    catWrap.innerHTML=`<h2>${cat.emoji} ${cat.name}</h2>`;
     const list=document.createElement('div'); list.className='tasks'; if(cat.id==='MOVEMENT_AND_RELEASE') list.classList.add('two-col');
     tasks.filter(t=>t.category===cat.id && state.enabled[t.id]!==false).forEach(task=>{
-      const done=today.tasks[task.id]?.done||0; const pct=Math.min(100,Math.round(100*done/task.countsPerDay)); const finished=done>=task.countsPerDay;
+      const today=getToday(); const done=today.tasks[task.id]?.done||0; const pct=Math.min(100,Math.round(100*done/task.countsPerDay)); const finished=done>=task.countsPerDay;
       const card=document.createElement('div'); card.className='task-card'+(finished?' done':'');
       card.innerHTML=`<div class="task-head"><div class="task-emoji">${task.emoji}</div><div class="task-title">${task.title}</div><div class="task-count">${done}/${task.countsPerDay}</div></div>
-        <div class="task-det">${task.details||''}</div>
         <div class="progressbar"><div style="width:${pct}%"></div></div>
-        <div class="actions"><button class="btn primary do-btn" data-id="${task.id}">✔️ I did this now</button><span class="pill">Reminders: ${task.remindersPerDay}</span></div>`;
+        <div class="actions"><button class="btn do-btn" data-id="${task.id}">✔️ I did this now</button> <span class="tiny">Reminders: ${task.remindersPerDay}</span></div>`;
       list.appendChild(card);
     });
     catWrap.appendChild(list); gridEl.appendChild(catWrap);
-    catWrap.querySelector('[data-cat-edit]').onclick=()=>openCatModal(cat);
-    catWrap.querySelector('[data-cat-del]').onclick=()=>deleteCategory(cat.id);
-    catWrap.querySelector('[data-cat-add]').onclick=()=>openEditModal({category:cat.id});
   });
-
   document.querySelectorAll('.do-btn').forEach(btn=>btn.onclick=()=>incrementTask(btn.dataset.id));
 }
 
-// Modal quick list grouped by category
+// Quick list grouped by category
 function renderQuickList(){
   const cats=getCategories(); const tasks=getTasks(); const today=getToday();
   quickTaskWrap.innerHTML='';
   cats.forEach(cat=>{
     const group=document.createElement('div'); group.className='soft'; group.style.marginBottom='6px';
-    const title=document.createElement('div'); title.className='section-title'; title.textContent = cat.emoji + ' ' + cat.name;
+    const title=document.createElement('div'); title.className='tiny'; title.style.fontWeight='800'; title.textContent = cat.emoji + ' ' + cat.name;
     group.appendChild(title);
     const row=document.createElement('div'); row.style.display='flex'; row.style.flexWrap='wrap'; row.style.gap='.3rem';
     tasks.filter(t=>t.category===cat.id && state.enabled[t.id]!==false).forEach(t=>{
       const done=today.tasks[t.id]?.done||0; const doneAll=done>=t.countsPerDay;
-      const b=document.createElement('button'); b.className='btn'+(doneAll?' muted':'');
-      b.textContent=t.title; b.disabled=!!doneAll;
-      if(!doneAll){ b.onclick=()=>{ incrementTask(t.id); hideReminder(); }; }
+      const b=document.createElement('button'); b.className='btn'+(doneAll?'':''); b.textContent=t.title; if(doneAll){ b.disabled=true; b.style.opacity=.6; }
+      else{ b.onclick=()=>{ incrementTask(t.id); hideReminder(); }; }
       row.appendChild(b);
     });
     group.appendChild(row); quickTaskWrap.appendChild(group);
@@ -479,36 +459,26 @@ function incrementTask(id){
   });
 }
 
-// Timer
-let timerInt=null, timerRemaining=180;
-const timerDisplay=document.getElementById('timerDisplay'); const timerInput=document.getElementById('timerInput'); const timerBox=document.getElementById('timerBox');
+// Timer & audio
+let timerInt=null, timerRemaining=180; const timerDisplay=document.getElementById('timerDisplay'); const timerInput=document.getElementById('timerInput'); const timerBox=document.getElementById('timerBox');
 function fmt(s){const m=Math.floor(s/60).toString().padStart(2,'0');const ss=(s%60).toString().padStart(2,'0');return `${m}:${ss}`;}
 function updateTimerUI(){ timerDisplay.textContent=fmt(timerRemaining); }
 function startTimer(){ ensureAudio(); if(timerInt) return; timerBox.classList.add('running'); timerInt=setInterval(()=>{ if(--timerRemaining<=0){ clearInterval(timerInt); timerInt=null; timerBox.classList.remove('running'); chime(); showReminder('Trampoline timer done – nice!'); timerRemaining=Math.max(60,parseInt(timerInput.value,10)*60||180); updateTimerUI(); } else updateTimerUI(); },1000); }
 function pauseTimer(){ if(timerInt){ clearInterval(timerInt); timerInt=null; timerBox.classList.remove('running'); } }
 function resetTimer(){ pauseTimer(); timerRemaining=Math.max(60,parseInt(timerInput.value,10)*60||180); updateTimerUI(); }
-
-// Audio
 let actx=null, masterGain=null; const volume=document.getElementById('volume');
 function ensureAudio(){ if(!actx){ actx=new (window.AudioContext||window.webkitAudioContext)(); masterGain=actx.createGain(); masterGain.gain.value=parseFloat(volume.value||0.5); masterGain.connect(actx.destination); } if(actx.state==='suspended'){ actx.resume(); } }
 volume.addEventListener('input',()=>{ if(masterGain) masterGain.gain.value=parseFloat(volume.value||0.5); });
-function bellVoice(time,freq,dur){ const osc=actx.createOscillator(); const g=actx.createGain(); osc.type='sine'; osc.frequency.setValueAtTime(freq,time); const o2=actx.createOscillator(); const g2=actx.createGain(); o2.type='sine'; o2.frequency.setValueAtTime(freq*2.01,time); g.gain.setValueAtTime(0.0001,time); g.gain.exponentialRampToValueAtTime(0.6,time+0.02); g.gain.exponentialRampToValueAtTime(0.0001,time+dur); g2.gain.setValueAtTime(0.0001,time); g2.gain.exponentialRampToValueAtTime(0.25,time+0.02); g2.gain.exponentialRampToValueAtTime(0.0001,time+dur*0.9); osc.connect(g); o2.connect(g2); g.connect(masterGain); g2.connect(masterGain); osc.start(time); osc.stop(time+dur+0.05); o2.start(time); o2.stop(time+dur+0.05); }
-function chime(){ try{ ensureAudio(); const t=actx.currentTime+0.01; bellVoice(t,880,1.2); bellVoice(t+0.25,1318.51,1.0); }catch(e){} const oldTitle=document.title; let n=0; const iv=setInterval(()=>{ document.title=(n++%2?'🔔 '+oldTitle:oldTitle); if(n>6){ clearInterval(iv); document.title=oldTitle; } },500); }
+function bellVoice(t,f,d){ const o=actx.createOscillator(), g=actx.createGain(), o2=actx.createOscillator(), g2=actx.createGain(); o.type='sine'; o.frequency.setValueAtTime(f,t); o2.type='sine'; o2.frequency.setValueAtTime(f*2.01,t); g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.6,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+d); g2.gain.setValueAtTime(0.0001,t); g2.gain.exponentialRampToValueAtTime(0.25,t+0.02); g2.gain.exponentialRampToValueAtTime(0.0001,t+d*0.9); o.connect(g); o2.connect(g2); g.connect(masterGain); g2.connect(masterGain); o.start(t); o.stop(t+d+0.05); o2.start(t); o2.stop(t+d+0.05); }
+function chime(){ try{ ensureAudio(); const t=actx.currentTime+0.01; bellVoice(t,880,1.2); bellVoice(t+0.25,1318.51,1.0);}catch(e){} }
 
 // Reminders
 const modal=document.getElementById('reminderModal'); const nextReminderEl=document.getElementById('nextReminder');
 function showReminder(text){ document.getElementById('reminderText').textContent=text||'Time for a reset'; renderQuickList(); modal.classList.add('show'); }
 function hideReminder(){ modal.classList.remove('show'); }
 document.getElementById('modalClose').onclick=hideReminder; document.getElementById('modalSnooze').onclick=()=>{ hideReminder(); scheduleIn(5*60); };
-function buildSchedule(){
-  const now=new Date(); const secsToMid=((new Date(now.getFullYear(),now.getMonth(),now.getDate()+1))-now)/1000; const slots=[];
-  getTasks().forEach(t=>{ if(state.enabled[t.id]===false) return; if(t.remindersPerDay>0){ const gap=secsToMid/(t.remindersPerDay+1); for(let i=1;i<=t.remindersPerDay;i++){ const at=now.getTime()+(gap*i*1000); slots.push({at,task:t}); } } });
-  slots.sort((a,b)=>a.at-b.at); state.schedule=slots;
-}
-function scheduleRunner(){ clearAllTimeouts(); if(!state.atComputer){ nextReminderEl.textContent='— (not at computer)'; return; } const now=Date.now(); let first=null;
-  state.schedule.forEach(slot=>{ const delay=Math.max(0,slot.at-now); const id=setTimeout(()=>{ if(!state.atComputer) return; chime(); showReminder(`Time for: ${slot.task.title}`); },delay); state.timers.push(id); if(first===null||slot.at<first) first=slot.at; });
-  if(first){ nextReminderEl.textContent=new Date(first).toLocaleTimeString(); }
-}
+function buildSchedule(){ const now=new Date(); const secsToMid=((new Date(now.getFullYear(),now.getMonth(),now.getDate()+1))-now)/1000; const slots=[]; getTasks().forEach(t=>{ if(state.enabled[t.id]===false) return; if(t.remindersPerDay>0){ const gap=secsToMid/(t.remindersPerDay+1); for(let i=1;i<=t.remindersPerDay;i++){ const at=now.getTime()+(gap*i*1000); slots.push({at,task:t}); } } }); slots.sort((a,b)=>a.at-b.at); state.schedule=slots; }
+function scheduleRunner(){ clearAllTimeouts(); if(!state.atComputer){ nextReminderEl.textContent='— (not at computer)'; return; } const now=Date.now(); let first=null; state.schedule.forEach(slot=>{ const delay=Math.max(0,slot.at-now); const id=setTimeout(()=>{ if(!state.atComputer) return; chime(); showReminder(`Time for: ${slot.task.title}`); },delay); state.timers.push(id); if(first===null||slot.at<first) first=slot.at; }); if(first){ nextReminderEl.textContent=new Date(first).toLocaleTimeString(); } }
 function clearAllTimeouts(){ state.timers.forEach(id=>clearTimeout(id)); state.timers=[]; }
 function scheduleIn(seconds){ clearAllTimeouts(); const at=Date.now()+seconds*1000; state.schedule=[{at,task:{title:'Snoozed reminder'}}]; scheduleRunner(); }
 
@@ -547,7 +517,7 @@ document.getElementById('timerInput').addEventListener('change', resetTimer);
 function getToday(){ return loadPersist()[todayKey()]; }
 function setToday(updater){ const raw=loadPersist(); const key=todayKey(); raw[key]=updater(raw[key]); savePersist(raw); render(); }
 
-// Settings JSON apply
+// Apply settings JSON
 function applySettingsJSON(txt){
   try{
     const payload=JSON.parse(txt);
@@ -559,6 +529,7 @@ function applySettingsJSON(txt){
 }
 
 // Init
+function applyTheme(t){document.body.className=''; document.body.classList.add('theme-'+t); document.getElementById('themeToggle').textContent='🎨 Mode: '+(t==='dark'?'Dark':t==='light'?'Light':'Bright');}
 applyTheme(loadTheme());
 state.enabled = loadEnabled();
 document.getElementById('checklistWrap').open = false;
