@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0f172a">
-<title>Mats Body Reset – Daily Tracker (v7b)</title>
+<title>Mats Body Reset – Daily Tracker (v7c manual update)</title>
 <style>
   :root{--bg:#0f172a;--panel:#111827EE;--muted:#94a3b8;--text:#e5e7eb;--accent:#22d3ee;--accent2:#a78bfa;--ok:#34d399;--warn:#f59e0b;--danger:#f87171;--border:#1f2937}
   body.theme-dark{--bg:#0f172a;--panel:#111827EE;--text:#e5e7eb;--muted:#94a3b8;--border:#1f2937;--accent:#22d3ee;--accent2:#a78bfa;background:radial-gradient(1200px 800px at 20% 0%, #0b1228 0%, #0f172a 50%, #0a0f22 100%);color:var(--text)}
   body.theme-light{--bg:#f8fafc;--panel:#ffffff;--text:#0f172a;--muted:#475569;--border:#e2e8f0;--accent:#0ea5e9;--accent2:#6366f1;background:linear-gradient(180deg,#f8fafc,#f1f5f9);color:var(--text)}
   body.theme-bright{--bg:#0a0a0a;--panel:#ffffff;--text:#0a0a0a;--muted:#374151;--border:#111827;--accent:#16a34a;--accent2:#22d3ee;background:linear-gradient(180deg,#ffffff,#f4f4f5);color:var(--text)}
-  *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto} 
+  *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto}
   header{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:linear-gradient(180deg, rgba(2,6,23,.75), rgba(2,6,23,.3));border-bottom:1px solid var(--border);
     padding:.55rem 1rem;display:flex;gap:12px;align-items:center;justify-content:space-between}
   body.theme-light header{background:linear-gradient(180deg,#fff,#f8fafc)} body.theme-bright header{background:linear-gradient(180deg,#fff,#f4f4f5)}
@@ -21,26 +21,44 @@
   .controls{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
   .btn{cursor:pointer;border:1px solid var(--border);color:var(--text);background:var(--panel);padding:.35rem .55rem;border-radius:10px;font-weight:600;font-size:12.5px}
   .btn.toggled{outline:2px solid var(--accent)}
-  main{display:grid;grid-template-columns:280px 1fr;gap:12px;padding:12px}
+  main{display:grid;grid-template-columns:300px 1fr;gap:12px;padding:12px;align-items:start}
   @media (max-width:1100px){main{grid-template-columns:1fr}.sidebar{position:static}}
-  .sidebar{position:sticky;top:64px;align-self:start;display:grid;gap:10px}
+  .sidebar{position:sticky;top:64px;align-self:start;display:grid;gap:10px;z-index:1}
   .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:9px}
   details.collapsible summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.4rem;font-weight:700}
-  .content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;align-items:start}
-  .category{display:grid;gap:6px} .category h2{margin:0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:.45rem}
-  .tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px} .tasks.two-col{grid-template-columns:repeat(2,minmax(210px,1fr))}
+  /* Grid for categories; prevent any overlap */
+  .content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;align-items:start;min-width:0;z-index:1}
+  .category{display:grid;gap:6px;min-width:0}
+  .category.panel{overflow:hidden}
+  .category h2{margin:0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:.45rem}
+  /* Inner tasks grid */
+  .tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px;min-width:0}
+  /* Two-column variant that never overflows */
+  .tasks.two-col{grid-template-columns:repeat(2,minmax(0,1fr))}
+  /* Cards */
   .task-card{background:linear-gradient(180deg, rgba(17,24,39,.85), rgba(2,6,23,.85));border:1px solid var(--border);border-radius:10px;padding:7px;display:grid;gap:5px}
   .task-card.done{opacity:.45;filter:saturate(.6)} .task-head{display:flex;align-items:center;gap:.35rem}
   .task-emoji{font-size:15px} .task-title{font-weight:700;font-size:12.5px} .task-count{margin-left:auto;color:#3b82f6;font-weight:700;font-size:11.5px}
   .progressbar{height:4px;background:transparent;border:1px solid var(--border);border-radius:999px;overflow:hidden}
   .progressbar>div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+  .tiny{font-size:11px;color:var(--muted)}
   .log-area{width:100%;height:110px;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px;font-size:12px}
-  .checklist{display:grid;gap:6px} .cl-row{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:.35rem;align-items:center}
-  .cl-title{font-size:12px} .cl-num{width:48px;text-align:center} .tiny{font-size:11px;color:var(--muted)} .soft{border:1px dashed var(--border);border-radius:8px;padding:6px}
-  .modal{position:fixed;inset:0;display:none;place-items:center;background:#0006;z-index:100} .modal.show{display:grid}
+  .checklist{display:grid;gap:6px}
+  .cl-row{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:.35rem;align-items:center}
+  .cl-title{font-size:12px}
+  .cl-num{width:48px;text-align:center}
+  .soft{border:1px dashed var(--border);border-radius:8px;padding:6px}
+  /* Modal */
+  .modal{position:fixed;inset:0;display:none;place-items:center;background:#0006;z-index:100}
+  .modal.show{display:grid}
   .modal .box{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px;width:min(680px,92vw);display:grid;gap:8px}
+  /* Timer big display while running */
   .timer.running .timer-display{font-size:56px}
   .badge{font-size:11px;border:1px solid var(--border);border-radius:999px;padding:.1rem .4rem;color:var(--muted)}
+  /* Mobile: let checklist panel scroll on its own so tiles never hide behind it */
+  @media (max-width:700px){
+    #checklistWrap{max-height:60vh;overflow:auto}
+  }
 </style>
 </head>
 <body class="theme-dark">
@@ -60,6 +78,7 @@
     <button id="exportSettings" class="btn">🧩 Save settings</button>
     <button id="importSettings" class="btn">🧩 Load settings</button>
     <button id="linkSettings" class="btn">🔗 Link settings file</button>
+    <button id="checkUpdates" class="btn">🔄 Check updates</button>
     <button id="resetAll" class="btn">♻️ Full reset</button>
   </div>
 </header>
@@ -155,19 +174,18 @@
 </div>
 
 <script>
-// SW with immediate update + auto reload
+// --- Service worker registration with manual "Check updates" ---
+let swReg = null;
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      const reg = await navigator.serviceWorker.register('./sw.js');
-      reg.update();
-      setInterval(() => reg.update(), 6 * 60 * 60 * 1000);
-      if (reg.waiting) reg.waiting.postMessage('SKIP_WAITING');
-      reg.addEventListener('updatefound', () => {
-        const sw = reg.installing;
+      swReg = await navigator.serviceWorker.register('./sw.js');
+      if (swReg.waiting) swReg.waiting.postMessage('SKIP_WAITING');
+      swReg.addEventListener('updatefound', () => {
+        const sw = swReg.installing;
         if (sw) sw.addEventListener('statechange', () => {
           if (sw.state === 'installed' && navigator.serviceWorker.controller) {
-            reg.waiting && reg.waiting.postMessage('SKIP_WAITING');
+            swReg.waiting && swReg.waiting.postMessage('SKIP_WAITING');
           }
         });
       });
@@ -179,6 +197,21 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+async function manualCheckForUpdates(){
+  if (!swReg) { alert('Service worker not ready yet. Try again in a moment.'); return; }
+  try {
+    await swReg.update();
+    if (swReg.waiting) {
+      swReg.waiting.postMessage('SKIP_WAITING');
+    } else {
+      alert('Checked for updates. You are on the latest version.');
+    }
+  } catch (e) {
+    alert('Update check failed. Please reload the app.');
+  }
+}
+
+// --- App data & UI ---
 const LS_KEY='mats_reset_tracker_v7', LOG_KEY='mats_reset_log_v7', ENABLE_KEY='mats_reset_enabled_v7', TASKS_KEY='mats_reset_tasks_v7', CATS_KEY='mats_reset_categories_v7', THEME_KEY='mats_reset_theme_v7';
 const EMOJIS=['🌀','🌬️','⚡','🚶','🤸','👃','💆','🦶','🫁','🏋️','🦴','🐸','🧠','🍑','🦖','🧘','💗','🌱','🪢','🧷','🧱','🦘','🏃','🎯','⭐','⬤','◆','■','💫','✨','🟣','🔵','🟢','🟠'];
 function Cat(id,name,emoji,builtin){return {id,name,emoji:emoji||'⭐',builtin:!!builtin};}
@@ -190,7 +223,7 @@ T('cranial_release','Cranial/Sphenoid Release','Nose blowing with side bend','MO
 T('face_jaw_scalp','Face/Jaw/Scalp Release','Dry shampoo technique','MOVEMENT_AND_RELEASE',2,2,'💆',true),
 T('ankle_release','Ankle Release','Partner‑assisted','MOVEMENT_AND_RELEASE',1,0,'🦶',true),
 T('rib_lifts','Rib Lifts','Partner‑assisted','MOVEMENT_AND_RELEASE',1,1,'🫁',true),
-T('deadlift_motion','"Deadlift" (motions)','Form only, no load','MOVEMENT_AND_RELEASE',2,2,'🏋️',true),
+T('deadlift_motion','\"Deadlift\" (motions)','Form only, no load','MOVEMENT_AND_RELEASE',2,2,'🏋️',true),
 T('hip_reset','Hip reset','Hip release/reset','MOVEMENT_AND_RELEASE',2,2,'🦴',true),
 T('frog_legs','Frog Legs','Gentle open/close hips','MOVEMENT_AND_RELEASE',1,0,'🐸',true),
 T('meningeal_stretch','Meningeal Stretch','Along spine','MOVEMENT_AND_RELEASE',1,0,'🧠',true),
@@ -237,6 +270,7 @@ async function autoSaveSettingsToFile(){ const json=currentSettingsPayload(); if
 document.getElementById('exportSettings').onclick=async()=>{ await autoSaveSettingsToFile(); alert('Settings saved.'); };
 document.getElementById('importSettings').onclick=async()=>{ await autoLoadSettingsFromFile(); renderChecklist(); render(); alert('Settings loaded.'); };
 document.getElementById('linkSettings').onclick=linkSettingsFile;
+document.getElementById('checkUpdates').onclick=manualCheckForUpdates;
 
 // Core stores
 function loadTaskStore(){let s={overrides:{},customs:[]}; try{s=JSON.parse(localStorage.getItem(TASKS_KEY)||'{}')||s;}catch(e){} if(!s.overrides) s.overrides={}; if(!Array.isArray(s.customs)) s.customs=[]; return s;}
@@ -420,7 +454,7 @@ function render(){
   cats.forEach(cat=>{
     const catWrap=document.createElement('div'); catWrap.className='category panel';
     catWrap.innerHTML=`<h2>${cat.emoji} ${cat.name}</h2>`;
-    const list=document.createElement('div'); list.className='tasks'; if(cat.id==='MOVEMENT_AND_RELEASE') list.classList.add('two-col');
+    const list=document.createElement('div'); list.className='tasks'; // adaptive 2-col applied after render
     tasks.filter(t=>t.category===cat.id && state.enabled[t.id]!==false).forEach(task=>{
       const today=getToday(); const done=today.tasks[task.id]?.done||0; const pct=Math.min(100,Math.round(100*done/task.countsPerDay)); const finished=done>=task.countsPerDay;
       const card=document.createElement('div'); card.className='task-card'+(finished?' done':'');
@@ -432,7 +466,25 @@ function render(){
     catWrap.appendChild(list); gridEl.appendChild(catWrap);
   });
   document.querySelectorAll('.do-btn').forEach(btn=>btn.onclick=()=>incrementTask(btn.dataset.id));
+  adaptTwoCol();
 }
+
+// Make the M&R category two-column only when the panel width allows it
+function adaptTwoCol(){
+  document.querySelectorAll('.category.panel').forEach(cat => {
+    const title = cat.querySelector('h2')?.textContent || '';
+    const list = cat.querySelector('.tasks');
+    if (!list) return;
+    const wideEnough = cat.clientWidth >= 520; // threshold for 2 cols
+    if (/Movement\s*&\s*Release/i.test(title)) {
+      list.classList.toggle('two-col', wideEnough);
+    } else {
+      list.classList.remove('two-col');
+    }
+  });
+}
+
+window.addEventListener('resize', adaptTwoCol);
 
 // Quick list grouped by category
 function renderQuickList(){
@@ -445,7 +497,7 @@ function renderQuickList(){
     const row=document.createElement('div'); row.style.display='flex'; row.style.flexWrap='wrap'; row.style.gap='.3rem';
     tasks.filter(t=>t.category===cat.id && state.enabled[t.id]!==false).forEach(t=>{
       const done=today.tasks[t.id]?.done||0; const doneAll=done>=t.countsPerDay;
-      const b=document.createElement('button'); b.className='btn'+(doneAll?'':''); b.textContent=t.title; if(doneAll){ b.disabled=true; b.style.opacity=.6; }
+      const b=document.createElement('button'); b.className='btn'; b.textContent=t.title; if(doneAll){ b.disabled=true; b.style.opacity=.6; }
       else{ b.onclick=()=>{ incrementTask(t.id); hideReminder(); }; }
       row.appendChild(b);
     });
@@ -469,7 +521,15 @@ function resetTimer(){ pauseTimer(); timerRemaining=Math.max(60,parseInt(timerIn
 let actx=null, masterGain=null; const volume=document.getElementById('volume');
 function ensureAudio(){ if(!actx){ actx=new (window.AudioContext||window.webkitAudioContext)(); masterGain=actx.createGain(); masterGain.gain.value=parseFloat(volume.value||0.5); masterGain.connect(actx.destination); } if(actx.state==='suspended'){ actx.resume(); } }
 volume.addEventListener('input',()=>{ if(masterGain) masterGain.gain.value=parseFloat(volume.value||0.5); });
-function bellVoice(t,f,d){ const o=actx.createOscillator(), g=actx.createGain(), o2=actx.createOscillator(), g2=actx.createGain(); o.type='sine'; o.frequency.setValueAtTime(f,t); o2.type='sine'; o2.frequency.setValueAtTime(f*2.01,t); g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.6,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+d); g2.gain.setValueAtTime(0.0001,t); g2.gain.exponentialRampToValueAtTime(0.25,t+0.02); g2.gain.exponentialRampToValueAtTime(0.0001,t+d*0.9); o.connect(g); o2.connect(g2); g.connect(masterGain); g2.connect(masterGain); o.start(t); o.stop(t+d+0.05); o2.start(t); o2.stop(t+d+0.05); }
+function bellVoice(t,f,d){
+  const o=actx.createOscillator(), g=actx.createGain(), o2=actx.createOscillator(), g2=actx.createGain();
+  o.type='sine'; o.frequency.setValueAtTime(f,t);
+  o2.type='sine'; o2.frequency.setValueAtTime(f*2.01,t);
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.6,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+  g2.gain.setValueAtTime(0.0001,t); g2.gain.exponentialRampToValueAtTime(0.25,t+0.02); g2.gain.exponentialRampToValueAtTime(0.0001,t+d*0.9);
+  o.connect(g); o2.connect(g2); g.connect(masterGain); g2.connect(masterGain);
+  o.start(t); o.stop(t+d+0.05); o2.start(t); o2.stop(t+d+0.05);
+}
 function chime(){ try{ ensureAudio(); const t=actx.currentTime+0.01; bellVoice(t,880,1.2); bellVoice(t+0.25,1318.51,1.0);}catch(e){} }
 
 // Reminders
@@ -529,7 +589,6 @@ function applySettingsJSON(txt){
 }
 
 // Init
-function applyTheme(t){document.body.className=''; document.body.classList.add('theme-'+t); document.getElementById('themeToggle').textContent='🎨 Mode: '+(t==='dark'?'Dark':t==='light'?'Light':'Bright');}
 applyTheme(loadTheme());
 state.enabled = loadEnabled();
 document.getElementById('checklistWrap').open = false;
